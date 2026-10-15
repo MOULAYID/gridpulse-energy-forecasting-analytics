@@ -1,30 +1,27 @@
 # Roadmap
 
-## Phase 0 — Foundation (this change)
-- [x] Repository structure and typed Python package
-- [x] Architecture and contracts documentation
-- [x] Basic unit test and CI checks
-- [ ] Verify local editable installation and CI run
+## Phase 0 — Foundation
+- [x] Repository structure, package, architecture documentation and CI
 
-## Phase 1 — First real data (next)
-- [ ] Verify RTE dataset field names, coverage, API limits and license
-- [ ] Implement one paginated API client + CLI and deterministic local sample
-- [ ] Validate UTC timestamps, MW units, duplicates and time gaps
-- [ ] Add mocked HTTP tests and source provenance
+## Phase 1 — First real data
+- [x] RTE paginated API client, UTC normalization, exports and unit tests
+- [ ] Verify successful live historical download and review QA output locally
 
-## Phase 2 — Storage and transformations
-- [ ] Docker Compose PostgreSQL and migrations
-- [ ] Raw/staging/mart tables and idempotent incremental loads
-- [ ] Data validation and SQL tests
+## Phase 2 — Local database (current)
+- [x] PostgreSQL Docker service and initial SQL table
+- [x] Validated CSV loader with repeatable upserts
+- [x] Unit tests for malformed, missing, duplicate and nonfinite values
+- [ ] Run ingestion/loader twice locally and verify duplicate prevention
+- [ ] Add database integration test and fuller raw/staging lineage
+- [ ] Add hourly marts and coverage audit
 
 ## Phase 3 — Descriptive Power BI
-- [ ] Build semantic star schema, DAX measures and first report page
+- [ ] Connect Power BI Desktop to PostgreSQL
+- [ ] Star schema, measures and executive overview
 
-## Phase 4 — Weather and forecasting
-- [ ] Integrate weather, archived forecasts and calendar features
-- [ ] Seasonal-naive baseline, SARIMAX and XGBoost
-- [ ] Rolling backtest, error metrics, prediction intervals and saved vintages
+## Phase 4 — Forecasting
+- [ ] Weather covariates and archived forecasts
+- [ ] Seasonal baseline, SARIMAX, XGBoost and rolling-origin evaluation
 
-## Phase 5 — Operations and polish
-- [ ] Scheduling, logging, freshness alerts, model monitoring and retraining
-- [ ] Additional Power BI pages, reproducibility, demo, and case-study README
+## Phase 5 — Operations and publication
+- [ ] Scheduling, monitoring, docs, portfolio demo and final report
