@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+# Secrets and machine settings
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+# Data, models and experimental artifacts
+data/raw/
+data/interim/
+data/processed/
+models/
+mlruns/
+artifacts/
+*.parquet
+*.duckdb
+# Notebooks
+.ipynb_checkpoints/
+# OS and editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+# Power BI caches and local settings (retain authored PBIP/TMDL)
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+**/.pbi/unappliedChanges.json
