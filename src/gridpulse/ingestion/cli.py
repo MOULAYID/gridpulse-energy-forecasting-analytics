@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 from gridpulse.ingestion.rte import fetch_range
@@ -43,7 +43,7 @@ def main() -> None:
 
     report = {
         "source": "RTE eco2mix-national-cons-def",
-        "retrieved_at_utc": datetime.now(timezone.utc).isoformat(),
+        "retrieved_at_utc": datetime.now(UTC).isoformat(),
         "start_inclusive": args.start.isoformat(),
         "end_exclusive": args.end.isoformat(),
         "counts": quality,

@@ -3,7 +3,7 @@ from datetime import date
 import httpx
 import pytest
 
-from gridpulse.ingestion.rte import RTEAPIError, daily_windows, fetch_window
+from gridpulse.ingestion.rte import RTEAPIError, daily_windows, fetch_window, timestamp_utc
 from gridpulse.quality.rte import normalize
 
 
@@ -51,8 +51,14 @@ def test_missing_and_irregular_records():
 
 
 def test_malformed_api_response():
-    with httpx.Client(
-        transport=httpx.MockTransport(lambda _: httpx.Response(200, json={"oops": []}))
-    ) as client:
-        with pytest.raises(RTEAPIError):
-            fetch_window(client, date(2025, 1, 1), date(2025, 1, 2))
+    with (
+        httpx.Client(
+            transport=httpx.MockTransport(lambda _: httpx.Response(200, json={"oops": []}))
+        ) as client,
+        pytest.raises(RTEAPIError),
+    ):
+        fetch_window(client, date(2025, 1, 1), date(2025, 1, 2))
+
+
+def test_zulu_timestamp_parsing():
+    assert timestamp_utc("2025-01-01T00:00:00Z").isoformat() == "2025-01-01T00:00:00+00:00"

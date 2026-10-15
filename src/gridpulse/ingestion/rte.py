@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from datetime import date, datetime, timedelta, timezone
-from typing import Any, Iterator
+from collections.abc import Iterator
+from datetime import UTC, date, datetime, timedelta
+from typing import Any
 
 import httpx
 
@@ -91,7 +92,8 @@ def fetch_range(start: date, end: date) -> list[dict[str, Any]]:
 
 
 def timestamp_utc(value: str) -> datetime:
-    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    # Explicitly support Z across interpreters without relying on unsafe Ruff transformations.
+    parsed = datetime.fromisoformat(value.removesuffix("Z") + "+00:00" if value.endswith("Z") else value)
     if parsed.tzinfo is None:
         raise ValueError("timestamp has no UTC offset")
-    return parsed.astimezone(timezone.utc)
+    return parsed.astimezone(UTC)
