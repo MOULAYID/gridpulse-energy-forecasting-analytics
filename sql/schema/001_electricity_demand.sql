@@ -1,5 +1,5 @@
 -- Phase 2: validated half-hour electricity power observations.
--- Store UTC time with timestamptz; no imputation in this table.
+-- Store UTC time with timestamptz. Do not impute missing values in this table.
 CREATE SCHEMA IF NOT EXISTS staging;
 
 CREATE TABLE IF NOT EXISTS staging.electricity_demand (
